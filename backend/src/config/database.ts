@@ -1,12 +1,13 @@
 // backend/src/config/database.ts
 import mongoose from 'mongoose';
 
-export const connectDB = async (): Promise<void> => {
+export const connectDatabase = async (): Promise<void> => {
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI as string);
-    console.log(`[Database] MongoDB connected: ${conn.connection.host}`);
+    const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/ai_career_platform';
+    await mongoose.connect(mongoUri);
+    console.log('Successfully connected to MongoDB Database.');
   } catch (error) {
-    console.error(`[Database Error] Connection failure:`, error);
+    console.error('MongoDB connection error:', error);
     process.exit(1);
   }
 };
