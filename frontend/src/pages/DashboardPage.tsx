@@ -5,7 +5,7 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import WorkIcon from '@mui/icons-material/Work';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import SendIcon from '@mui/icons-material/Send';
-import { getDashboardMetrics, DashboardMetrics } from '../api/analytics.api';
+import { getDashboardMetrics, DashboardMetrics } from '../api/analytics.api.ts';
 
 export const DashboardPage: React.FC = () => {
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);

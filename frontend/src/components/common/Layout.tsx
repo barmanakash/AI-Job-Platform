@@ -23,7 +23,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../store/slices/authSlice';
+import { logout } from '../../store/slices/authSlice.ts';
 
 const drawerWidth = 240;
 

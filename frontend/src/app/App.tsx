@@ -3,9 +3,9 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import { Provider, useSelector } from 'react-redux';
-import { store, RootState } from './store';
-import { Layout } from './components/common/Layout';
-import { DashboardPage } from './pages/DashboardPage';
+import { store, RootState } from '../store/index.ts';
+import { Layout } from '../components/common/Layout.tsx';
+import { DashboardPage } from '../pages/DashboardPage.tsx';
 
 const theme = createTheme({
   palette: {

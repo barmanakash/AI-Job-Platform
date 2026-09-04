@@ -1,5 +1,5 @@
 // frontend/src/api/analytics.api.ts
-import axiosClient from './axiosClient';
+import axiosClient from './axiosClient.ts';
 
 export interface DashboardMetrics {
   totalResumes: number;
