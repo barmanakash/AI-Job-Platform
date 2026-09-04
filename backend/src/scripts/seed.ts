@@ -11,6 +11,10 @@ const runSeed = async () => {
   try {
     await mongoose.connect(MONGO_URI);
     console.log('Connected to MongoDB for seeding...');
+    const db = mongoose.connection.db;
+    if (!db) {
+      throw new Error('MongoDB database connection is unavailable');
+    }
 
     // Clear existing collections
     const collections = mongoose.connection.collections;
@@ -20,7 +24,7 @@ const runSeed = async () => {
 
     // 1. Seed User
     const hashedPassword = await bcrypt.hash('Password@123', 10);
-    const userResult = await mongoose.connection.db.collection('users').insertOne({
+    const userResult = await db.collection('users').insertOne({
       name: 'Akash Barman',
       email: 'akash.dev@example.com',
       password: hashedPassword,
@@ -30,7 +34,7 @@ const runSeed = async () => {
     const userId = userResult.insertedId;
 
     // 2. Seed Resume
-    const resumeResult = await mongoose.connection.db.collection('resumes').insertOne({
+    const resumeResult = await db.collection('resumes').insertOne({
       userId,
       title: 'Full Stack Frontend Engineer Resume',
       parsedContent: {
@@ -44,7 +48,7 @@ const runSeed = async () => {
     const resumeId = resumeResult.insertedId;
 
     // 3. Seed Job Description
-    const jobResult = await mongoose.connection.db.collection('jobs').insertOne({
+    const jobResult = await db.collection('jobs').insertOne({
       userId,
       title: 'Senior Frontend Developer',
       company: 'TechCorp Solutions',
@@ -57,7 +61,7 @@ const runSeed = async () => {
     const jobId = jobResult.insertedId;
 
     // 4. Seed Kanban Application Stage
-    await mongoose.connection.db.collection('applications').insertOne({
+    await db.collection('applications').insertOne({
       userId,
       jobId,
       resumeId,
