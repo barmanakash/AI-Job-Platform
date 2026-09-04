@@ -19,12 +19,15 @@ import analyticsRoutes from './routes/analytics.routes';
 import recommendationRoutes from './routes/recommendation.routes';
 
 const app: Application = express();
+const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:3000,http://localhost:3001')
+  .split(',')
+  .map((origin) => origin.trim());
 
 // Global Security & Parsing Middleware
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+    origin: allowedOrigins,
     credentials: true,
   })
 );

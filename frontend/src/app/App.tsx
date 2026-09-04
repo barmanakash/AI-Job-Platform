@@ -6,6 +6,7 @@ import { Provider, useSelector } from 'react-redux';
 import { store, RootState } from '../store/index.ts';
 import { Layout } from '../components/common/Layout.tsx';
 import { DashboardPage } from '../pages/DashboardPage.tsx';
+import LoginPage from '../pages/LoginPage.tsx';
 
 const theme = createTheme({
   palette: {
@@ -32,6 +33,7 @@ export const App: React.FC = () => {
         <CssBaseline />
         <BrowserRouter>
           <Routes>
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>

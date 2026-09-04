@@ -27,8 +27,9 @@ const runSeed = async () => {
     const userResult = await db.collection('users').insertOne({
       name: 'Akash Barman',
       email: 'akash.dev@example.com',
-      password: hashedPassword,
-      role: 'JOB_SEEKER',
+      passwordHash: hashedPassword,
+      role: 'USER',
+      isVerified: true,
       createdAt: new Date(),
     });
     const userId = userResult.insertedId;
