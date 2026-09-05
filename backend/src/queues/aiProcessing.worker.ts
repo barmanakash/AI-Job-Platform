@@ -7,7 +7,14 @@ import { MatchAIService } from '../services/matchAI.service';
 import { SkillGapAIService } from '../services/skillGapAI.service';
 import { CoverLetterAIService } from '../services/coverLetterAI.service';
 
-export const initAIWorker = () => {
+export const initAIWorker = async () => {
+  try {
+    await redisConnection.ping();
+  } catch {
+    console.warn('Redis is unavailable; AI worker is disabled for this session.');
+    return null;
+  }
+
   const worker = new Worker<AIJobPayload>(
     QUEUE_NAMES.AI_PROCESSING,
     async (job: Job<AIJobPayload>) => {

@@ -7,8 +7,10 @@ const redisPort = parseInt(process.env.REDIS_PORT || '6379', 10);
 export const redisConnection = new Redis({
   host: redisHost,
   port: redisPort,
-  maxRetriesPerRequest: null, // Required by BullMQ
+  lazyConnect: true,
+  maxRetriesPerRequest: null,
   enableReadyCheck: false,
+  reconnectOnError: () => true,
 });
 
 redisConnection.on('connect', () => {
@@ -16,5 +18,5 @@ redisConnection.on('connect', () => {
 });
 
 redisConnection.on('error', (err) => {
-  console.error('Redis connection failure:', err);
+  console.warn('Redis connection failure; AI queue worker will remain disabled:', err.message || err);
 });
